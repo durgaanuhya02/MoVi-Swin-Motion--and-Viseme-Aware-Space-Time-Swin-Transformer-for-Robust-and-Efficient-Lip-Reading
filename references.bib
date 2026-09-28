@@ -1,0 +1,586 @@
+% ============================================================================
+% references.bib — UROP lip reading project (MoVi-Swin)
+% Entries marked "% VERIFY" have fields that were not confirmed against the
+% publisher page; check them (authors / pages / volume) before submission.
+% ============================================================================
+
+% ---------------------------------------------------------------------------
+% A. Base papers we extend
+% ---------------------------------------------------------------------------
+@article{wang2022_3dcvt,
+  author  = {Wang, Huijuan and Pu, Gangqiang and Chen, Tingyu},
+  title   = {A Lip Reading Method Based on {3D} Convolutional Vision Transformer},
+  journal = {IEEE Access},
+  volume  = {10},
+  pages   = {77205--77212},
+  year    = {2022},
+  doi     = {10.1109/ACCESS.2022.3193231}
+}
+
+@article{park2025_swinlip,
+  author  = {Park, Young-Hu and Park, Rae-Hong and Park, Hyung-Min},
+  title   = {{SwinLip}: An Efficient Visual Speech Encoder for Lip Reading Using {Swin} Transformer},
+  journal = {Neurocomputing},
+  volume  = {639},
+  pages   = {130289},
+  year    = {2025},
+  doi     = {10.1016/j.neucom.2025.130289}
+}
+
+% ---------------------------------------------------------------------------
+% B. Datasets
+% ---------------------------------------------------------------------------
+@article{cooke2006_grid,
+  author  = {Cooke, Martin and Barker, Jon and Cunningham, Stuart and Shao, Xu},
+  title   = {An Audio-Visual Corpus for Speech Perception and Automatic Speech Recognition},
+  journal = {The Journal of the Acoustical Society of America},
+  volume  = {120},
+  number  = {5},
+  pages   = {2421--2424},
+  year    = {2006},
+  doi     = {10.1121/1.2229005}
+}
+
+@inproceedings{chung2016_lrw,
+  author    = {Chung, Joon Son and Zisserman, Andrew},
+  title     = {Lip Reading in the Wild},
+  booktitle = {Asian Conference on Computer Vision (ACCV)},
+  year      = {2016},
+  doi       = {10.1007/978-3-319-54184-6_6}
+}
+
+@inproceedings{yang2019_lrw1000,
+  author    = {Yang, Shuang and Zhang, Yuanhang and Feng, Dalu and Yang, Mingmin and Wang, Chenhao and Xiao, Jingyun and Long, Keyu and Shan, Shiguang and Chen, Xilin},
+  title     = {{LRW-1000}: A Naturally-Distributed Large-Scale Benchmark for Lip Reading in the Wild},
+  booktitle = {IEEE International Conference on Automatic Face \& Gesture Recognition (FG)},
+  year      = {2019},
+  doi       = {10.1109/FG.2019.8756582}
+}
+
+@inproceedings{chung2017_lrs,
+  author    = {Chung, Joon Son and Senior, Andrew and Vinyals, Oriol and Zisserman, Andrew},
+  title     = {Lip Reading Sentences in the Wild},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2017}
+}
+
+@article{afouras2018_lrs3,
+  author  = {Afouras, Triantafyllos and Chung, Joon Son and Zisserman, Andrew},
+  title   = {{LRS3-TED}: A Large-Scale Dataset for Visual Speech Recognition},
+  journal = {arXiv preprint arXiv:1809.00496},
+  year    = {2018}
+}
+
+@inproceedings{zhao2019_cmlr,
+  author    = {Zhao, Ya and Xu, Rui and Song, Mingli},
+  title     = {A Cascade Sequence-to-Sequence Model for {Chinese Mandarin} Lip Reading},
+  booktitle = {ACM Multimedia Asia},
+  year      = {2019},
+  doi       = {10.1145/3338533.3366579}
+}
+
+% ---------------------------------------------------------------------------
+% C. Word-level lip reading baselines and training recipes
+% ---------------------------------------------------------------------------
+@article{assael2016_lipnet,
+  author  = {Assael, Yannis M. and Shillingford, Brendan and Whiteson, Shimon and de Freitas, Nando},
+  title   = {{LipNet}: End-to-End Sentence-level Lipreading},
+  journal = {arXiv preprint arXiv:1611.01599},
+  year    = {2016}
+}
+
+@inproceedings{stafylakis2017_resnet_lstm,
+  author    = {Stafylakis, Themos and Tzimiropoulos, Georgios},
+  title     = {Combining Residual Networks with {LSTMs} for Lipreading},
+  booktitle = {Interspeech},
+  year      = {2017}
+}
+
+@inproceedings{martinez2020_tcn,
+  author    = {Martinez, Brais and Ma, Pingchuan and Petridis, Stavros and Pantic, Maja},
+  title     = {Lipreading Using Temporal Convolutional Networks},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2020}
+}
+
+@inproceedings{ma2021_dctcn,
+  author    = {Ma, Pingchuan and Wang, Yujiang and Shen, Jie and Petridis, Stavros and Pantic, Maja},
+  title     = {Lip-reading with Densely Connected Temporal Convolutional Networks},
+  booktitle = {IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year      = {2021}
+}
+
+@inproceedings{ma2021_practical,
+  author    = {Ma, Pingchuan and Martinez, Brais and Petridis, Stavros and Pantic, Maja},
+  title     = {Towards Practical Lipreading with Distilled and Efficient Models},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2021}
+}
+
+@inproceedings{ma2022_training,
+  author    = {Ma, Pingchuan and Wang, Yujiang and Petridis, Stavros and Shen, Jie and Pantic, Maja},
+  title     = {Training Strategies for Improved Lip-reading},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2022}
+}
+
+@article{feng2020_without_pains,
+  author  = {Feng, Dalu and Yang, Shuang and Shan, Shiguang and Chen, Xilin},
+  title   = {Learn an Effective Lip Reading Model without Pains},
+  journal = {arXiv preprint arXiv:2011.07557},
+  year    = {2020}
+}
+
+@inproceedings{koumparoulis2022_effnetv2,
+  author    = {Koumparoulis, Alexandros and Potamianos, Gerasimos},
+  title     = {Accurate and Resource-Efficient Lipreading with {EfficientNetV2} and Transformers},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2022}
+}
+
+@inproceedings{hao2021_tsm,
+  author    = {Hao, Mingfeng and Mamut, Mutallip and Yadikar, Nurbiya and Aysa, Alimjan and Ubul, Kurban},
+  title     = {How to Use Time Information Effectively? Combining with Time Shift Module for Lipreading},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  pages     = {7988--7992},
+  year      = {2021}
+}
+
+@inproceedings{zhang2020_roi,
+  author    = {Zhang, Yuanhang and Yang, Shuang and Xiao, Jingyun and Shan, Shiguang and Chen, Xilin},
+  title     = {Can We Read Speech Beyond the Lips? Rethinking {RoI} Selection for Deep Visual Speech Recognition},
+  booktitle = {IEEE International Conference on Automatic Face \& Gesture Recognition (FG)},
+  year      = {2020}
+}
+
+@article{lee2025_td3net,
+  author  = {Lee, Byung Hoon and others},  % VERIFY full author list
+  title   = {{TD3Net}: A Temporal Densely Connected Multi-Dilated Convolutional Network for Lipreading},
+  journal = {Journal of Visual Communication and Image Representation},
+  year    = {2025},
+  note    = {arXiv:2506.16073}
+}
+
+@article{mini3dcvt2025,
+  author  = {TODO},  % VERIFY: authors not confirmed
+  title   = {{Mini-3DCvT}: A Lightweight Lip-Reading Method Based on {3D} Convolution Visual Transformer},
+  journal = {The Visual Computer},
+  volume  = {41},
+  number  = {3},
+  year    = {2025},
+  doi     = {10.1007/s00371-024-03515-y}
+}
+
+@article{st3d2025,
+  author  = {TODO},  % VERIFY: authors, journal, year (PMC12031098)
+  title   = {A Novel Approach for Visual Speech Recognition Using the Partition-Time Masking and {Swin} Transformer {3D} Convolutional Model},
+  journal = {TODO},
+  year    = {2025}
+}
+
+% ---------------------------------------------------------------------------
+% D. Motion / landmark / geometry streams (related to contribution C2)
+% ---------------------------------------------------------------------------
+@inproceedings{xiao2020_deformation_flow,
+  author    = {Xiao, Jingyun and Yang, Shuang and Zhang, Yuanhang and Shan, Shiguang and Chen, Xilin},
+  title     = {Deformation Flow Based Two-Stream Network for Lip Reading},
+  booktitle = {IEEE International Conference on Automatic Face \& Gesture Recognition (FG)},
+  year      = {2020}
+}
+
+@article{sheng2022_asstgcn,
+  author  = {Sheng, Changchong and Zhu, Xinzhong and Xu, Huiying and Pietik{\"a}inen, Matti and Liu, Li},
+  title   = {Adaptive Semantic-Spatio-Temporal Graph Convolutional Network for Lip Reading},
+  journal = {IEEE Transactions on Multimedia},
+  volume  = {24},
+  pages   = {3545--3557},
+  year    = {2022}
+}
+
+@article{xue2023_lipformer,
+  author  = {Xue, Feng and others},  % VERIFY full author list
+  title   = {{LipFormer}: Learning to Lipread Unseen Speakers Based on Visual-Landmark Transformers},
+  journal = {arXiv preprint arXiv:2302.02141},
+  year    = {2023}
+}
+
+@inproceedings{wu2024_landmark_crossspeaker,
+  author    = {Wu, Linzhi and others},  % VERIFY full author list
+  title     = {Landmark-Guided Cross-Speaker Lip Reading with Mutual Information Regularization},
+  booktitle = {Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING)},
+  year      = {2024}
+}
+
+@article{yang2025_landmark_guided,
+  author  = {Yang, Lei and Jin, Junshan and Zhang, Mingyuan and He, Yi and Chen, Bofan and Wang, Shilin},
+  title   = {Landmark Guided Visual Feature Extractor for Visual Speech Recognition with Limited Resource},
+  journal = {arXiv preprint arXiv:2508.07233},
+  year    = {2025}
+}
+
+@article{daou2024_arabic_crossattn,
+  author  = {Daou, Samar and others},  % VERIFY full author list
+  title   = {Cross-Attention Fusion of Visual and Geometric Features for Large Vocabulary {Arabic} Lipreading},
+  journal = {arXiv preprint arXiv:2402.11520},
+  year    = {2024}
+}
+
+@article{teng2026_headpose_film,
+  author  = {Teng, Matthew Kit Khinn and others},  % VERIFY full author list
+  title   = {Head-Pose-Aware Visual Speech Recognition with {FiLM} Modulation},
+  journal = {arXiv preprint arXiv:2606.00751},
+  year    = {2026}
+}
+
+% ---------------------------------------------------------------------------
+% E. Visemes and homophenes (related to contribution C3)
+% ---------------------------------------------------------------------------
+@article{chen2024_cvsem,
+  author  = {Chen, Hang and others},  % VERIFY full author list
+  title   = {Collaborative Viseme Subword and End-to-End Modeling for Word-Level Lip Reading},
+  journal = {IEEE Transactions on Multimedia},
+  year    = {2024},
+  doi     = {10.1109/TMM.2024.3390148}
+}
+
+@inproceedings{hao2025_lipgen,
+  author    = {Hao, Bowen and Zhou, Dongliang and Li, Xiaojie and Zhang, Xingyu and Xie, Liang and Wu, Jianlong and Yin, Erwei},
+  title     = {{LipGen}: Viseme-Guided Lip Video Generation for Enhancing Visual Speech Recognition},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2025}
+}
+
+@inproceedings{kim2022_mvm,
+  author    = {Kim, Minsu and Yeo, Jeong Hun and Ro, Yong Man},
+  title     = {Distinguishing Homophenes Using Multi-Head Visual-Audio Memory for Lip Reading},
+  booktitle = {AAAI Conference on Artificial Intelligence},
+  year      = {2022}
+}
+
+@article{peymanfard2021_viseme_decoding,
+  author  = {Peymanfard, Javad and others},  % VERIFY full author list
+  title   = {Lip Reading Using External Viseme Decoding},
+  journal = {arXiv preprint arXiv:2104.04784},
+  year    = {2021}
+}
+
+@inproceedings{hu2023_hearing_lips_noise,
+  author    = {Hu, Yuchen and others},  % VERIFY full author list
+  title     = {Hearing Lips in Noise: Universal Viseme-Phoneme Mapping and Transfer for Robust Audio-Visual Speech Recognition},
+  booktitle = {Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year      = {2023}
+}
+
+@inproceedings{papadopoulos2025_visemes_avsr,
+  author    = {Papadopoulos, Aristeidis and Harte, Naomi},
+  title     = {Interpreting the Role of Visemes in Audio-Visual Speech Recognition},
+  booktitle = {IEEE Automatic Speech Recognition and Understanding Workshop (ASRU)},
+  year      = {2025}
+}
+
+@article{fisher1968_visemes,
+  author  = {Fisher, Cletus G.},
+  title   = {Confusions Among Visually Perceived Consonants},
+  journal = {Journal of Speech and Hearing Research},
+  volume  = {11},
+  number  = {4},
+  pages   = {796--804},
+  year    = {1968}
+}
+
+@misc{cmudict,
+  author       = {{Carnegie Mellon University}},
+  title        = {The {CMU} Pronouncing Dictionary},
+  howpublished = {\url{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}}
+}
+
+% ---------------------------------------------------------------------------
+% F. Audio knowledge / distillation (optional contribution C4)
+% ---------------------------------------------------------------------------
+@inproceedings{ahn2024_syncvsr,
+  author    = {Ahn, Young Jin and Park, Jungwoo and Park, Sangha and Choi, Jonghyun and Kim, Kee-Eung},
+  title     = {{SyncVSR}: Data-Efficient Visual Speech Recognition with End-to-End Crossmodal Audio Token Synchronization},
+  booktitle = {Interspeech},
+  pages     = {867--871},
+  year      = {2024}
+}
+
+@inproceedings{zhao2020_hearing_lips,
+  author    = {Zhao, Ya and Xu, Rui and Wang, Xinchao and Hou, Peng and Tang, Haihong and Song, Mingli},
+  title     = {Hearing Lips: Improving Lip Reading by Distilling Speech Recognizers},
+  booktitle = {AAAI Conference on Artificial Intelligence},
+  year      = {2020}
+}
+
+@inproceedings{ren2021_master,
+  author    = {Ren, Sucheng and Du, Yong and Lv, Jianming and Han, Guoqiang and He, Shengfeng},
+  title     = {Learning from the Master: Distilling Cross-Modal Advanced Knowledge for Lip Reading},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {13325--13333},
+  year      = {2021}
+}
+
+@inproceedings{kim2021_bridging,
+  author    = {Kim, Minsu and Hong, Joanna and Park, Se Jin and Ro, Yong Man},
+  title     = {Multi-modality Associative Bridging through Memory: Speech Sound Recollected from Face Video},
+  booktitle = {IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages     = {296--306},
+  year      = {2021}
+}
+
+@inproceedings{afouras2020_asr_all_you_need,
+  author    = {Afouras, Triantafyllos and Chung, Joon Son and Zisserman, Andrew},
+  title     = {{ASR} is All You Need: Cross-Modal Distillation for Lip Reading},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2020}
+}
+
+@article{yeo2024_akvsr,
+  author  = {Yeo, Jeong Hun and Kim, Minsu and Choi, Jeongsoo and Kim, Dae Hoe and Ro, Yong Man},  % VERIFY author list
+  title   = {{AKVSR}: Audio Knowledge Empowered Visual Speech Recognition by Compressing Audio Knowledge of a Pretrained Model},
+  journal = {IEEE Transactions on Multimedia},
+  year    = {2024}
+}
+
+@inproceedings{shi2022_avhubert,
+  author    = {Shi, Bowen and Hsu, Wei-Ning and Lakhotia, Kushal and Mohamed, Abdelrahman},
+  title     = {Learning Audio-Visual Speech Representation by Masked Multimodal Cluster Prediction},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2022}
+}
+
+@article{hinton2015_kd,
+  author  = {Hinton, Geoffrey and Vinyals, Oriol and Dean, Jeff},
+  title   = {Distilling the Knowledge in a Neural Network},
+  journal = {arXiv preprint arXiv:1503.02531},
+  year    = {2015}
+}
+
+% ---------------------------------------------------------------------------
+% G. Sentence-level / large-scale VSR (related work, stretch goal)
+% ---------------------------------------------------------------------------
+@article{afouras2022_deep_avsr,
+  author  = {Afouras, Triantafyllos and Chung, Joon Son and Senior, Andrew and Vinyals, Oriol and Zisserman, Andrew},
+  title   = {Deep Audio-Visual Speech Recognition},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {44},
+  number  = {12},
+  pages   = {8717--8727},
+  year    = {2022},
+  doi     = {10.1109/TPAMI.2018.2889052}
+}
+
+@inproceedings{ma2021_conformer_avsr,
+  author    = {Ma, Pingchuan and Petridis, Stavros and Pantic, Maja},
+  title     = {End-to-End Audio-Visual Speech Recognition with Conformers},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2021}
+}
+
+@article{ma2022_multilingual_vsr,
+  author  = {Ma, Pingchuan and Petridis, Stavros and Pantic, Maja},
+  title   = {Visual Speech Recognition for Multiple Languages in the Wild},
+  journal = {Nature Machine Intelligence},
+  volume  = {4},
+  pages   = {930--939},
+  year    = {2022}
+}
+
+@inproceedings{haliassos2023_raven,
+  author    = {Haliassos, Alexandros and Ma, Pingchuan and Mira, Rodrigo and Petridis, Stavros and Pantic, Maja},
+  title     = {Jointly Learning Visual and Auditory Speech Representations from Raw Data},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2023}
+}
+
+@inproceedings{ma2023_autoavsr,
+  author    = {Ma, Pingchuan and Haliassos, Alexandros and Fernandez-Lopez, Adriana and Chen, Honglie and Petridis, Stavros and Pantic, Maja},
+  title     = {{Auto-AVSR}: Audio-Visual Speech Recognition with Automatic Labels},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2023}
+}
+
+@inproceedings{prajwal2022_subword,
+  author    = {Prajwal, K R and Afouras, Triantafyllos and Zisserman, Andrew},
+  title     = {Sub-word Level Lip Reading with Visual Attention},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2022}
+}
+
+@inproceedings{yeo2024_vspllm,
+  author    = {Yeo, Jeong Hun and Han, Seunghee and Kim, Minsu and Ro, Yong Man},
+  title     = {Where Visual Speech Meets Language: {VSP-LLM} Framework for Efficient and Context-Aware Visual Speech Processing},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP},
+  year      = {2024}
+}
+
+% ---------------------------------------------------------------------------
+% H. Surveys and background
+% ---------------------------------------------------------------------------
+@article{fernandezlopez2018_survey,
+  author  = {Fernandez-Lopez, Adriana and Sukno, Federico M.},
+  title   = {Survey on Automatic Lip-Reading in the Era of Deep Learning},
+  journal = {Image and Vision Computing},
+  volume  = {78},
+  pages   = {53--72},
+  year    = {2018}
+}
+
+@article{sheng2022_vsa_survey,
+  author  = {Sheng, Changchong and Kuang, Gangyao and Bai, Liang and Hou, Chenping and Guo, Yulan and Xu, Xin and Pietik{\"a}inen, Matti and Liu, Li},  % VERIFY
+  title   = {Deep Learning for Visual Speech Analysis: A Survey},
+  journal = {arXiv preprint arXiv:2205.10839},
+  year    = {2022}
+}
+
+@article{mcgurk1976,
+  author  = {McGurk, Harry and MacDonald, John},
+  title   = {Hearing Lips and Seeing Voices},
+  journal = {Nature},
+  volume  = {264},
+  number  = {5588},
+  pages   = {746--748},
+  year    = {1976}
+}
+
+% ---------------------------------------------------------------------------
+% I. Core methods / building blocks used in our model
+% ---------------------------------------------------------------------------
+@inproceedings{vaswani2017_transformer,
+  author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  title     = {Attention Is All You Need},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2017}
+}
+
+@inproceedings{dosovitskiy2021_vit,
+  author    = {Dosovitskiy, Alexey and others},
+  title     = {An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2021}
+}
+
+@inproceedings{liu2021_swin,
+  author    = {Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
+  title     = {{Swin Transformer}: Hierarchical Vision Transformer Using Shifted Windows},
+  booktitle = {IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2021}
+}
+
+@inproceedings{liu2022_videoswin,
+  author    = {Liu, Ze and Ning, Jia and Cao, Yue and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Hu, Han},
+  title     = {Video {Swin} Transformer},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2022}
+}
+
+@inproceedings{wu2021_cvt,
+  author    = {Wu, Haiping and Xiao, Bin and Codella, Noel and Liu, Mengchen and Dai, Xiyang and Yuan, Lu and Zhang, Lei},
+  title     = {{CvT}: Introducing Convolutions to Vision Transformers},
+  booktitle = {IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2021}
+}
+
+@inproceedings{hu2018_senet,
+  author    = {Hu, Jie and Shen, Li and Sun, Gang},
+  title     = {Squeeze-and-Excitation Networks},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2018}
+}
+
+@inproceedings{gulati2020_conformer,
+  author    = {Gulati, Anmol and others},
+  title     = {Conformer: Convolution-augmented Transformer for Speech Recognition},
+  booktitle = {Interspeech},
+  year      = {2020}
+}
+
+@article{ji2013_3dcnn,
+  author  = {Ji, Shuiwang and Xu, Wei and Yang, Ming and Yu, Kai},
+  title   = {{3D} Convolutional Neural Networks for Human Action Recognition},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {35},
+  number  = {1},
+  pages   = {221--231},
+  year    = {2013}
+}
+
+@inproceedings{he2016_resnet,
+  author    = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  title     = {Deep Residual Learning for Image Recognition},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2016}
+}
+
+@inproceedings{cho2014_gru,
+  author    = {Cho, Kyunghyun and van Merri{\"e}nboer, Bart and Gulcehre, Caglar and Bahdanau, Dzmitry and Bougares, Fethi and Schwenk, Holger and Bengio, Yoshua},
+  title     = {Learning Phrase Representations using {RNN} Encoder-Decoder for Statistical Machine Translation},
+  booktitle = {Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year      = {2014}
+}
+
+@inproceedings{graves2006_ctc,
+  author    = {Graves, Alex and Fern{\'a}ndez, Santiago and Gomez, Faustino and Schmidhuber, J{\"u}rgen},
+  title     = {Connectionist Temporal Classification: Labelling Unsegmented Sequence Data with Recurrent Neural Networks},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2006}
+}
+
+@inproceedings{yan2018_stgcn,
+  author    = {Yan, Sijie and Xiong, Yuanjun and Lin, Dahua},
+  title     = {Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition},
+  booktitle = {AAAI Conference on Artificial Intelligence},
+  year      = {2018}
+}
+
+@inproceedings{perez2018_film,
+  author    = {Perez, Ethan and Strub, Florian and de Vries, Harm and Dumoulin, Vincent and Courville, Aaron},
+  title     = {{FiLM}: Visual Reasoning with a General Conditioning Layer},
+  booktitle = {AAAI Conference on Artificial Intelligence},
+  year      = {2018}
+}
+
+@article{lugaresi2019_mediapipe,
+  author  = {Lugaresi, Camillo and others},
+  title   = {{MediaPipe}: A Framework for Building Perception Pipelines},
+  journal = {arXiv preprint arXiv:1906.08172},
+  year    = {2019}
+}
+
+@article{kartynnik2019_facemesh,
+  author  = {Kartynnik, Yury and Ablavatski, Artsiom and Grishchenko, Ivan and Grundmann, Matthias},
+  title   = {Real-time Facial Surface Geometry from Monocular Video on Mobile {GPUs}},
+  journal = {arXiv preprint arXiv:1907.06724},
+  year    = {2019}
+}
+
+% ---------------------------------------------------------------------------
+% J. Training techniques and tools
+% ---------------------------------------------------------------------------
+@inproceedings{zhang2018_mixup,
+  author    = {Zhang, Hongyi and Cisse, Moustapha and Dauphin, Yann N. and Lopez-Paz, David},
+  title     = {mixup: Beyond Empirical Risk Minimization},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2018}
+}
+
+@inproceedings{szegedy2016_label_smoothing,
+  author    = {Szegedy, Christian and Vanhoucke, Vincent and Ioffe, Sergey and Shlens, Jon and Wojna, Zbigniew},
+  title     = {Rethinking the Inception Architecture for Computer Vision},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2016}
+}
+
+@inproceedings{loshchilov2019_adamw,
+  author    = {Loshchilov, Ilya and Hutter, Frank},
+  title     = {Decoupled Weight Decay Regularization},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2019}
+}
+
+@inproceedings{paszke2019_pytorch,
+  author    = {Paszke, Adam and others},
+  title     = {{PyTorch}: An Imperative Style, High-Performance Deep Learning Library},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2019}
+}
