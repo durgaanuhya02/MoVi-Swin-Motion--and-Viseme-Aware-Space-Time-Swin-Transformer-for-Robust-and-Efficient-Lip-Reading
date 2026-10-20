@@ -1,75 +1,66 @@
-# MoVi-Swin: Motion- and Viseme-Aware Space-Time Swin Transformer for Lip Reading
+# See, Propose, Verify — Visually Grounded LLM Decoding for Lip Reading
 
 > 🚧 **Work in progress** — UROP research project. Results will be added as experiments complete.
+> Full method and plan: [`APPROACH.md`](APPROACH.md)
 
-MoVi-Swin is a lightweight visual speech recognition (lip reading) model that recognises spoken words from silent video of the mouth. It builds on two recent transformer lip readers — **SwinLip** (Park et al., 2025) and **3DCvT** (Wang et al., 2022) — and targets the core difficulty of lip reading: **homophenes**, words that look the same on the lips (e.g. *b / p / m*).
+This project improves **VALLR** (Thomas, Fish & Bowden, ICCV 2025), a two-stage lip reader that predicts phonemes from video and lets a large language model (LLM) turn them into sentences. VALLR is *open-loop*: the LLM's sentence is never checked against the video, which leads to homophone errors and possible hallucination.
+
+We **close the loop**: the LLM proposes several sentences, each is **verified against the lip movements**, and words the video does not support are **repaired**.
 
 ## Key ideas
 
 | # | Contribution | What it does |
 |---|---|---|
-| **C1** | **Space-time shifted-window encoder + SE-Patch-Merging** | Extends SwinLip's per-frame 2D attention to 3D windows spanning neighbouring frames, and re-weights channels (3DCvT's SE idea) where downsampling loses information. |
-| **C2** | **Landmark motion stream** | A spatio-temporal graph network over 40 MediaPipe lip landmarks (position + velocity), fused into the transformer at multiple stages through gated cross-attention for robustness to pose and lighting. |
-| **C3** | **Viseme-supervised training** | An auxiliary CTC loss over viseme (visual phoneme) sequences inside the encoder, plus a homophene-group evaluation. |
-| C4 *(optional)* | Audio-teacher distillation | Audio is used only during training; inference is visual-only. |
+| **C1** | **Visual verification** | Re-scores LLM sentence candidates by the CTC likelihood of their phoneme/viseme sequence given the video, combined with the LLM score. Training-free. |
+| **C2** | **Viseme-tolerant scoring** | Verification uses visemes, so candidates differing only in look-alike sounds (p/b/m, s/z) are left to the LLM, while candidates the lips contradict are rejected. |
+| **C3** | **Localised repair** | Forced alignment finds words with weak visual support; the LLM rewrites only those words. |
+| C4 *(extension)* | **Verified self-adaptation** | High-scoring outputs become pseudo-labels to adapt the visual encoder to a new speaker without labels. |
 
-## Architecture
+## Pipeline
 
 ```
-Mouth video (T×88×88)                    Lip landmarks (T×40×3)
-      │                                          │
-3D spatio-temporal stem                   ST-GCN motion encoder
-      │                                          │
-Space-time Swin stages + SE-Patch-Merging ◄── gated cross-attention
-      │
-      ├── viseme CTC head (auxiliary)
-      │
-1D Conv-Attention → temporal back-end → word classifier
+Video → visual encoder → phoneme + viseme CTC
+      → LLM proposes N sentences
+      → VERIFY each against the video (viseme-level CTC score + LLM score)
+      → REPAIR unsupported words → final sentence
 ```
 
 ## Datasets
 
 | Dataset | Use | Access |
 |---|---|---|
-| [GRID](https://zenodo.org/record/3625687) | Development, ablations, homophene analysis (unseen-speaker split: speakers 1, 2, 20, 22 held out) | Free (CC-BY 4.0) |
-| [LRW](https://www.robots.ox.ac.uk/~vgg/data/lip_reading/lrw1.html) | Main English benchmark (500 words) | BBC data-sharing agreement |
-| [LRW-1000](https://vipl.ict.ac.cn/resources/databases/201810/t20181017_32714.html) | Mandarin benchmark (1000 words) | VIPL release agreement |
+| [GRID](https://zenodo.org/record/3625687) | Visual model development, speaker adaptation | Free (CC-BY 4.0) |
+| TCD-TIMIT | Full sentence-level pipeline | Free research registration |
+| [LRS2](https://www.robots.ox.ac.uk/~vgg/data/lip_reading/lrs2.html) | Comparison with VALLR | BBC data-sharing agreement |
+| WikiText-103 + CMU Pronouncing Dictionary | LLM phoneme→sentence training text | Free |
 
-Datasets are **not** included in this repository — download them from the official sources under their licences.
+Datasets are **not** included in this repository — download them from the official sources under their licences (`download_grid.sh` fetches GRID).
 
-## Project structure
+## Metrics
 
-```
-src/
-├─ preprocess/   mouth cropping, lip landmarks, word clipping, viseme labels
-├─ datasets/     PyTorch datasets and augmentation
-├─ models/       baseline, SwinLip, MoVi-Swin and building blocks
-├─ train.py
-└─ evaluate.py   accuracy, homophene-group accuracy, FLOPs, latency
-configs/         one YAML file per experiment
-```
+WER / CER, phoneme and viseme error rate, **unsupported-word rate** (hallucination proxy), homophone-subset accuracy, per-speaker WER, latency.
 
 ## Setup
 
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate   |   Linux/macOS: source .venv/bin/activate
-pip install torch torchvision opencv-python mediapipe numpy einops timm fvcore nltk tqdm tensorboard pyyaml
+pip install torch torchvision opencv-python mediapipe numpy einops timm nltk tqdm tensorboard pyyaml transformers peft bitsandbytes jiwer
 ```
 
-Python 3.11 is recommended (MediaPipe compatibility).
+Python 3.11 recommended. LLM fine-tuning uses QLoRA (4-bit) and fits a 16 GB GPU (Kaggle / Colab).
 
 ## Roadmap
 
-- [x] Literature review and dataset selection
+- [x] Literature review, novelty check
 - [x] GRID corpus download
-- [ ] Preprocessing pipeline (mouth crops, landmarks, word clips, visemes)
-- [ ] Baseline (3D conv + ResNet-18 + BiGRU)
-- [ ] SwinLip reproduction
-- [ ] C1 — space-time windows + SE-Patch-Merging
-- [ ] C2 — landmark motion stream
-- [ ] C3 — viseme CTC supervision
-- [ ] LRW / LRW-1000 experiments
+- [ ] Preprocessing (mouth crops, phoneme + viseme labels, WikiText phoneme corpus)
+- [ ] Stage 1 — visual encoder with phoneme and viseme CTC heads
+- [ ] Stage 2 — LoRA phoneme→sentence LLM (VALLR-style baseline)
+- [ ] C1 + C2 — visual verification with viseme-tolerant scoring
+- [ ] C3 — localised repair + unsupported-word metric
+- [ ] C4 — verified speaker self-adaptation (extension)
+- [ ] TCD-TIMIT / LRS2 experiments
 - [ ] Paper write-up
 
 ## Results
@@ -78,12 +69,12 @@ Python 3.11 is recommended (MediaPipe compatibility).
 
 ## References
 
-Key works this project builds on (full list in [`references.bib`](references.bib)):
+Full list in [`references.bib`](references.bib). Key works:
 
-- Y.-H. Park, R.-H. Park, H.-M. Park, "SwinLip: An Efficient Visual Speech Encoder for Lip Reading Using Swin Transformer," *Neurocomputing*, 2025.
-- H. Wang, G. Pu, T. Chen, "A Lip Reading Method Based on 3D Convolutional Vision Transformer," *IEEE Access*, 2022.
-- Y. M. Assael et al., "LipNet: End-to-End Sentence-level Lipreading," arXiv:1611.01599, 2016.
-- M. Cooke et al., "An Audio-Visual Corpus for Speech Perception and Automatic Speech Recognition," *JASA*, 2006.
+- M. Thomas, E. Fish, R. Bowden, "VALLR: Visual ASR Language Model for Lip Reading," *ICCV*, 2025.
+- C. Sun et al., "VALLR-Pin: Uncertainty-Factorized Visual Speech Recognition for Mandarin with Pinyin Guidance," arXiv:2512.20032, 2025.
+- M. K. K. Teng et al., "Curriculum-Based Noise Adaptation for Phoneme-to-Text Reconstruction in Visual Speech Recognition," arXiv:2609.20839, 2026.
+- A. Graves et al., "Connectionist Temporal Classification," *ICML*, 2006.
 
 ## Acknowledgements
 
