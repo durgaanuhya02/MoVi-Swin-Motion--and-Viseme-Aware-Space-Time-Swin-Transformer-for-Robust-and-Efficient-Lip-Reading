@@ -5,8 +5,10 @@
 # Safe to re-run: finished speakers are skipped, partial downloads resume.
 
 BASE="https://spandh.dcs.shef.ac.uk/gridcorpus"
-DEST="/c/Users/Durga/OneDrive/Desktop/UROP PROJECT/GRID"
-TMP="/c/Users/Durga/grid_tmp"
+# Override on other machines, e.g. on Kaggle:
+#   GRID_DEST=/tmp/GRID GRID_TMP=/tmp/grid_zips bash download_grid.sh
+DEST="${GRID_DEST:-/c/Users/Durga/OneDrive/Desktop/UROP PROJECT/GRID}"
+TMP="${GRID_TMP:-/c/Users/Durga/grid_tmp}"
 mkdir -p "$DEST" "$TMP"
 
 for i in $(seq 1 34); do

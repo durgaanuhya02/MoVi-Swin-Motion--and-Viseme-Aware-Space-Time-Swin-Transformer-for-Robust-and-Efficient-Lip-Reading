@@ -20,3 +20,6 @@ __pycache__/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Downloaded model files
+models_cache/
