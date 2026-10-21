@@ -1,0 +1,22 @@
+# Stage 2: phoneme -> sentence LLM (LoRA). Intended for a Kaggle T4 GPU (QLoRA 4-bit).
+# Llama 3.2 is gated: accept the licence on huggingface.co and add an HF token as a Kaggle secret.
+model_name: meta-llama/Llama-3.2-1B
+corpus: /kaggle/working/llm_corpus.jsonl
+out_dir: /kaggle/working/runs/llm_p2t
+quantize: true
+seed: 0
+
+lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+epochs: 1
+max_steps: null          # set to cap training time
+batch_size: 16
+grad_accum: 2
+lr: 0.0002
+max_len: 192
+log_every: 50
+save_every: 1000

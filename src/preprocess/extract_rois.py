@@ -73,13 +73,17 @@ def read_frames(path, start=0, end=None):
     return frames, fps
 
 
-def detect_landmarks(landmarker, frames, fps):
-    """(T, 478, 3) landmarks in pixel units (x, y) and relative z, plus detection mask."""
+def detect_landmarks(landmarker, frames, fps, every=1):
+    """(T, 478, 3) landmarks in pixel units (x, y) and relative z, plus detection mask.
+    With every > 1, only every N-th frame (and the last) is detected; the rest are
+    interpolated by interpolate_missing()."""
     import mediapipe as mp_
     h, w = frames[0].shape[:2]
     out = np.zeros((len(frames), 478, 3), np.float32)
     found = np.zeros(len(frames), bool)
     for t, frame in enumerate(frames):
+        if t % every and t != len(frames) - 1:
+            continue
         image = mp_.Image(image_format=mp_.ImageFormat.SRGB,
                           data=cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         res = landmarker.detect_for_video(image, int(t * 1000 / fps))
@@ -128,14 +132,14 @@ def crop_mouths(frames, lm):
 _LANDMARKER = None
 
 
-def process(entry, out_dir):
+def process(entry, out_dir, every=1):
     global _LANDMARKER
     if _LANDMARKER is None:
         _LANDMARKER = make_landmarker()
     frames, fps = read_frames(entry["video"], entry.get("start") or 0, entry.get("end"))
     if not frames:
         return {"id": entry["id"], "error": "no frames"}
-    lm, found = detect_landmarks(_LANDMARKER, frames, fps)
+    lm, found = detect_landmarks(_LANDMARKER, frames, fps, every)
     if not found.any():
         return {"id": entry["id"], "error": "no face detected"}
     lm = interpolate_missing(lm, found)
@@ -174,9 +178,9 @@ def read_video(path):
 
 
 def _worker(args):
-    entry, out_dir = args
+    entry, out_dir, every = args
     try:
-        return process(entry, out_dir)
+        return process(entry, out_dir, every)
     except Exception as e:  # keep going; failures are logged
         return {"id": entry["id"], "error": repr(e)}
 
@@ -187,6 +191,9 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--limit", type=int, default=None, help="process only the first N clips (testing)")
+    ap.add_argument("--shard", default="0/1", help="i/n: process only the i-th of n equal parts")
+    ap.add_argument("--detect-every", type=int, default=1,
+                    help="run face detection on every N-th frame and interpolate the rest")
     args = ap.parse_args()
 
     out_dir = Path(args.out)
@@ -197,6 +204,8 @@ def main():
         done = {json.loads(l)["id"] for l in index_path.read_text().splitlines() if l.strip()}
 
     entries = [json.loads(l) for l in Path(args.manifest).read_text().splitlines() if l.strip()]
+    i, n = map(int, args.shard.split("/"))
+    entries = entries[i::n]
     if args.limit:
         entries = entries[:args.limit]
     todo = [e for e in entries if e["id"] not in done]
@@ -205,7 +214,8 @@ def main():
 
     t0 = time.time()
     with index_path.open("a") as idx, error_path.open("a") as err, mp.Pool(args.workers) as pool:
-        for n, res in enumerate(pool.imap_unordered(_worker, [(e, out_dir) for e in todo], chunksize=4), 1):
+        jobs = [(e, out_dir, args.detect_every) for e in todo]
+        for n, res in enumerate(pool.imap_unordered(_worker, jobs, chunksize=4), 1):
             (err if "error" in res else idx).write(json.dumps(res) + "\n")
             if n % 50 == 0 or n == len(todo):
                 idx.flush(); err.flush()
