@@ -1,6 +1,6 @@
 # Datasets (download from official sources — see README)
-GRID/
-data/
+/GRID/
+/data/
 
 # Training outputs
 runs/
